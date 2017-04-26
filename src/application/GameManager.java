@@ -28,6 +28,7 @@ public class GameManager extends Application {
 	private static AnchorPane beginPane;
 	private static BeginController beginController;
 	private static AnchorPane mainPane;
+	private static AnchorPane infoPane;
 	private static AnchorPane recordPane;
 	private static BorderPane pane;
 	private static Stage stage;
@@ -47,7 +48,7 @@ public class GameManager extends Application {
         mainLoader.setLocation(GameManager.class.getResource("MainPane.fxml"));
         try {
         		dragonBallGTPlayer.stop();
-	    		dragonBallPlayer.stop();
+	    		dragonBallZPlayer.stop();
 	    		dragonBallSuperPlayer.play();
 			playerName = beginController.username.getText();
 			mainPane = (AnchorPane) mainLoader.load();
@@ -59,12 +60,12 @@ public class GameManager extends Application {
 	}
 	
 	public static void reset(){
-
 		FXMLLoader beginLoader = new FXMLLoader();
 		beginLoader.setLocation(GameManager.class.getResource("BeginPane.fxml"));
         try {
+        		dragonBallPlayer.stop();
         		dragonBallGTPlayer.stop();
-        		dragonBallPlayer.play();
+        		dragonBallZPlayer.play();
 			beginPane = (AnchorPane) beginLoader.load();
 	        pane.setCenter(beginPane);
 	        beginController = (BeginController) beginLoader.getController();
@@ -73,6 +74,20 @@ public class GameManager extends Application {
 			e.printStackTrace();
 		}
         		
+	}
+	
+	public static void showInfo(){
+		FXMLLoader infoLoader = new FXMLLoader();
+		infoLoader.setLocation(GameManager.class.getResource("InfoPane.fxml"));
+        try {
+	    		dragonBallZPlayer.stop();
+	    		dragonBallPlayer.play();
+			infoPane = (AnchorPane) infoLoader.load();
+			pane.setCenter(infoPane);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static void endGame(){
@@ -122,7 +137,6 @@ public class GameManager extends Application {
 		try {
 			pane = new BorderPane();
 			reset();
-			
 			Scene scene = new Scene(pane,400,400);
 			primaryStage.setScene(scene);
 			primaryStage.setWidth(1600);
@@ -138,6 +152,7 @@ public class GameManager extends Application {
 			e.printStackTrace();
 		}
 	}
+	
 	
 	static ArrayList<Image> monsterImage = new ArrayList<Image>();
 	static String[] monsterName = {"Cell", "Broli", "Buu", "Frieza", "Zamasu", "Black Goku", 

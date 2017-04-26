@@ -103,6 +103,12 @@ public class Goku extends ImageView{
 		}
 	}
 	
+	static String childGokuInfo = "Slow cooling time\nSmall kame";
+	static String superSaiyanIInfo = "Medium Kame\nMedium cooling time";
+	static String superSaiyanIIInfo = "Medium Kame\nSlow Motion";
+	static String superSaiyanIIIInfo = "Destroy everything if hitten\nLarge Kame";
+	static String superSaiyanIVInfo =  "Pass through everything\nX-large Kame";
+	static String superSaiyanGodInfo = "Pass through everything\nMega-large Kame";
 	void superMode(SuperSaiyanType type){
 		controller.hintLabel.setVisible(true);
 		controller.hintDisplayTime = 3000;
@@ -113,36 +119,28 @@ public class Goku extends ImageView{
 				superTicks = 10000;
 				xspeed = 0;
 				this.setFitHeight(120);
-				controller.hintLabel.setText("Super Saiyan I!\n"
-						+ "Medium Kame\n"
-						+ "Medium cooling time");
+				controller.hintLabel.setText("Super Saiyan I!\n" + superSaiyanIInfo);
 				break;
 			case super2:
 				GameManager.playMusic(super2Sound);
 				superTicks = 10000;
 				xspeed = -400;
 				this.setFitHeight(150);
-				controller.hintLabel.setText("Super Saiyan II!\n"
-						+ "Medium Kame\n"
-						+ "Slow Motion");
+				controller.hintLabel.setText("Super Saiyan II!\n" + superSaiyanIIInfo);
 				break;
 			case super3:
 				GameManager.playMusic(super3Sound);
 				superTicks = 5000;
 				xspeed = 0;
 				this.setFitHeight(200);
-				controller.hintLabel.setText("Super Saiyan III!\n"
-						+ "Destroy everything if hitten\n"
-						+ "Large Kame");
+				controller.hintLabel.setText("Super Saiyan III!\n" + superSaiyanIIIInfo);
 				break;
 			case super4:
 				GameManager.playMusic(super4Sound);
 				superTicks = 10000;
 				xspeed = 300;
 				this.setFitHeight(300);
-				controller.hintLabel.setText("Super Saiyan IV!\n"
-						+ "Pass through everything\n"
-						+ "X-large Kame");
+				controller.hintLabel.setText("Super Saiyan IV!\n" + superSaiyanIVInfo);
 				break;
 			case superGod:
 				GameManager.playMusic(super4Sound);
@@ -150,9 +148,7 @@ public class Goku extends ImageView{
 				superTicks = 10000;
 				xspeed = 800;
 				this.setFitHeight(400);
-				controller.hintLabel.setText("SUPER SAIYAN GOD!!!\n"
-						+ "Pass through everything\n"
-						+ "Mega-large Kame");
+				controller.hintLabel.setText("SUPER SAIYAN GOD!!!\n" + superSaiyanGodInfo);
 			default:
 				break;
 		}

@@ -12,9 +12,12 @@ public class BeginController {
 	
 	@FXML TextField username;
 	
-	@FXML
-	public void startGame(ActionEvent action){
+	@FXML public void startGame(ActionEvent action){
 		GameManager.begin();
+	}
+	
+	@FXML public void showInfo(ActionEvent action){
+		GameManager.showInfo();
 	}
 	
 	@FXML

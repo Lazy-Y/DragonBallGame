@@ -144,9 +144,11 @@ public class MainController {
 		alert.setTitle("Great Job, Goku!");
 		alert.setHeaderText(null);
 		alert.setContentText("You killed " + killCount + " enemies and earned " + score + " points!");
-
-		alert.showAndWait();
-		GameManager.endGame();
+		
+		Platform.runLater(()->{
+			alert.showAndWait();
+			GameManager.endGame();
+		});
 	}
 	
 	void changeHP(int delta){

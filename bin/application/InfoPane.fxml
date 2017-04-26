@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="infoPane" prefHeight="1800.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.InfoController">
+   <children>
+      <ScrollPane prefHeight="1200.0" prefWidth="1600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1600.0" prefWidth="1600.0">
+               <children>
+                  <ImageView fitHeight="1800.0" fitWidth="3000.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <image>
+                        <Image url="@../views/infoBG.jpg" />
+                     </image>
+                  </ImageView>
+                  <BorderPane prefHeight="1600.0" prefWidth="1600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <center>
+                        <GridPane prefHeight="673.0" prefWidth="1600.0" BorderPane.alignment="CENTER">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                 <top>
+                                    <Label text="Child Goku" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="50.0" />
+                                       </font>
+                                    </Label>
+                                 </top>
+                                 <bottom>
+                                    <Label fx:id="gokuChildLabel" alignment="TOP_LEFT" prefHeight="128.0" prefWidth="533.0" text="Label" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="32.0" />
+                                       </font>
+                                    </Label>
+                                 </bottom>
+                                 <center>
+                                    <ImageView fitHeight="540.0" fitWidth="470.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                       <image>
+                                          <Image url="@../views/goku.png" />
+                                       </image>
+                                    </ImageView>
+                                 </center>
+                              </BorderPane>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                 <top>
+                                    <Label text="Super Saiyan I" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="50.0" />
+                                       </font>
+                                    </Label>
+                                 </top>
+                                 <bottom>
+                                    <Label fx:id="superSaiyanILabel" alignment="TOP_LEFT" prefHeight="128.0" prefWidth="533.0" text="Label" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="32.0" />
+                                       </font>
+                                    </Label>
+                                 </bottom>
+                                 <center>
+                                    <ImageView fitHeight="570.0" fitWidth="470.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                       <image>
+                                          <Image url="@../views/super1.png" />
+                                       </image>
+                                    </ImageView>
+                                 </center>
+                              </BorderPane>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+                                 <top>
+                                    <Label text="Super Saiyan II" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="50.0" />
+                                       </font>
+                                    </Label>
+                                 </top>
+                                 <bottom>
+                                    <Label fx:id="superSaiyanIILabel" alignment="TOP_LEFT" prefHeight="128.0" prefWidth="533.0" text="Label" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="32.0" />
+                                       </font>
+                                    </Label>
+                                 </bottom>
+                                 <center>
+                                    <ImageView fitHeight="540.0" fitWidth="470.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                       <image>
+                                          <Image url="@../views/super2.png" />
+                                       </image>
+                                    </ImageView>
+                                 </center>
+                              </BorderPane>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                                 <top>
+                                    <Label text="Super Saiyan III" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="50.0" />
+                                       </font>
+                                    </Label>
+                                 </top>
+                                 <bottom>
+                                    <Label fx:id="superSaiyanIIILabel" alignment="TOP_LEFT" prefHeight="128.0" prefWidth="533.0" text="Label" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="32.0" />
+                                       </font>
+                                    </Label>
+                                 </bottom>
+                                 <center>
+                                    <ImageView fitHeight="540.0" fitWidth="470.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                       <image>
+                                          <Image url="@../views/super3.png" />
+                                       </image>
+                                    </ImageView>
+                                 </center>
+                              </BorderPane>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <top>
+                                    <Label text="Super Saiyan IV" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="50.0" />
+                                       </font>
+                                    </Label>
+                                 </top>
+                                 <bottom>
+                                    <Label fx:id="superSaiyanIVLabel" alignment="TOP_LEFT" prefHeight="128.0" prefWidth="533.0" text="Label" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="32.0" />
+                                       </font>
+                                    </Label>
+                                 </bottom>
+                                 <center>
+                                    <ImageView fitHeight="540.0" fitWidth="470.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                       <image>
+                                          <Image url="@../views/super4.png" />
+                                       </image>
+                                    </ImageView>
+                                 </center>
+                              </BorderPane>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <top>
+                                    <Label text="SUPER SAIYAN GOD" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="50.0" />
+                                       </font>
+                                    </Label>
+                                 </top>
+                                 <bottom>
+                                    <Label fx:id="superSaiyanGodLabel" alignment="TOP_LEFT" prefHeight="128.0" prefWidth="533.0" text="Label" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="32.0" />
+                                       </font>
+                                    </Label>
+                                 </bottom>
+                                 <center>
+                                    <ImageView fitHeight="540.0" fitWidth="470.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                       <image>
+                                          <Image url="@../views/superGod.png" />
+                                       </image>
+                                    </ImageView>
+                                 </center>
+                              </BorderPane>
+                           </children>
+                        </GridPane>
+                     </center>
+                     <bottom>
+                        <FlowPane alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label text="Press Q to back   ">
+                                 <font>
+                                    <Font size="50.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </FlowPane>
+                     </bottom>
+                  </BorderPane>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
