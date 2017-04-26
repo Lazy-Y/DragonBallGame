@@ -1,23 +1,28 @@
 package application;
 
-import javafx.animation.Animation;
-import javafx.animation.Interpolator;
-import javafx.animation.KeyValue;
-import javafx.animation.Transition;
-import javafx.scene.image.Image;
+import javafx.application.Platform;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.Duration;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class Goku extends ImageView{
 	
+	SuperSaiyanType type;
+	static MediaPlayer super1Sound = GameManager.loadMusic("saiyan1.mp3");
+	static MediaPlayer super2Sound = GameManager.loadMusic("saiyan2.mp3");
+	static MediaPlayer super3Sound = GameManager.loadMusic("saiyan3.mp3");
+	static MediaPlayer super4Sound = GameManager.loadMusic("saiyan4.mp3");
+	static MediaPlayer superGodSound = GameManager.loadMusic("god.mp3");
+	static MediaPlayer jumpSound = GameManager.loadMusic("jump.wav");
+	
 	void setGokuImage(){
-		Image image = new Image("views/goku.png");
-		this.setImage(image);
+		this.setImage(SuperSaiyan.gokuImage);
 	}
 	// build the player's character
 	public Goku(MainController controller){
 		super();
+		type = SuperSaiyanType.normal;
 		setGokuImage();
 		this.setFitHeight(100);
 		this.setPreserveRatio(true);
@@ -31,8 +36,17 @@ public class Goku extends ImageView{
 	void render(double deltaTime){
 		yspeed += gravity * deltaTime / 1000;
 		pos += yspeed * deltaTime / 1000;
-		if (pos > 680){
-			pos = 680;
+		double yPosMax = 680;
+		switch (type){
+			case normal: yPosMax = 680; break;
+			case super1: yPosMax = 660; break;
+			case super2: yPosMax = 630; break;
+			case super3: yPosMax = 580; break;
+			case super4: yPosMax = 480; break;
+			case superGod: yPosMax = 380; break;
+		}
+		if (pos > yPosMax){
+			pos = yPosMax;
 			yspeed = 0;
 		}
 		if (pos < 0){
@@ -43,12 +57,12 @@ public class Goku extends ImageView{
 		
 		if (superTicks > 0){
 			superTicks -= deltaTime;
-			if (superTicks <= 0) setGokuImage();
-		}
-		
-		if (godTicks > 0){
-			godTicks -= deltaTime;
-			if (godTicks <= 0) setGokuImage();
+			if (superTicks <= 0){
+				type = SuperSaiyanType.normal;
+				this.setFitHeight(100);
+				setGokuImage();
+				xspeed = 0;
+			}
 		}
 		
 		if (kame != null) kame.render(deltaTime);
@@ -56,33 +70,97 @@ public class Goku extends ImageView{
 	}
 	 
 	void jumpAction(){
+		GameManager.playMusic(jumpSound);
 		yspeed -= 1000;
 	}
 
 	void fireAction(){
-		if (godTicks > 0 || superTicks > 0){
-			if (coolingTicks <= 0){
-				kame = new Kame(controller);
-				if (godTicks > 0) coolingTicks = 400;
-				else if (superTicks > 0) coolingTicks = 1000;
+		if (coolingTicks <= 0){
+			kame = new Kame(controller);
+			switch (type){
+				case normal:
+					coolingTicks = 3000;
+					break;
+				case super1:
+					coolingTicks = 1000;
+					break;
+				case super2:
+					coolingTicks = 1000;
+					break;
+				case super3:
+					coolingTicks = 1500;
+					break;
+				case super4:
+					coolingTicks = 800;
+					break;
+				case superGod:
+					coolingTicks = 400;
+					break;
+				default:
+					coolingTicks = 1000;
+					break;
 			}
 		}
 	}
 	
-	void superMode(){
-		superTicks = 1000 * 10;
-		godTicks = 0;
-		this.setImage(new Image("views/super.png"));
-	}
-	
-	void godMode(){
-		godTicks = 1000 * 5;
-		superTicks = 0;
-		this.setImage(new Image("views/god.png"));
+	void superMode(SuperSaiyanType type){
+		controller.hintLabel.setVisible(true);
+		controller.hintDisplayTime = 3000;
+		controller.goku.coolingTicks = 0;
+		switch (type){
+			case super1:
+				GameManager.playMusic(super1Sound);
+				superTicks = 10000;
+				xspeed = 0;
+				this.setFitHeight(120);
+				controller.hintLabel.setText("Super Saiyan I!\n"
+						+ "Medium Kame\n"
+						+ "Medium cooling time");
+				break;
+			case super2:
+				GameManager.playMusic(super2Sound);
+				superTicks = 10000;
+				xspeed = -400;
+				this.setFitHeight(150);
+				controller.hintLabel.setText("Super Saiyan II!\n"
+						+ "Medium Kame\n"
+						+ "Slow Motion");
+				break;
+			case super3:
+				GameManager.playMusic(super3Sound);
+				superTicks = 5000;
+				xspeed = 0;
+				this.setFitHeight(200);
+				controller.hintLabel.setText("Super Saiyan III!\n"
+						+ "Destroy everything if hitten\n"
+						+ "Large Kame");
+				break;
+			case super4:
+				GameManager.playMusic(super4Sound);
+				superTicks = 10000;
+				xspeed = 300;
+				this.setFitHeight(300);
+				controller.hintLabel.setText("Super Saiyan IV!\n"
+						+ "Pass through everything\n"
+						+ "X-large Kame");
+				break;
+			case superGod:
+				GameManager.playMusic(super4Sound);
+				GameManager.playMusic(superGodSound);
+				superTicks = 10000;
+				xspeed = 800;
+				this.setFitHeight(400);
+				controller.hintLabel.setText("SUPER SAIYAN GOD!!!\n"
+						+ "Pass through everything\n"
+						+ "Mega-large Kame");
+			default:
+				break;
+		}
+		this.type = type;
+		this.setImage(SuperSaiyan.loadImage(type));
 	}
 	
 	double superTicks = 0;
-	double godTicks = 0;
 	double coolingTicks = 0;
 	Kame kame = null;
 	
@@ -91,4 +169,5 @@ public class Goku extends ImageView{
 	double yspeed = 0;
 	double gravity = 2500;
 	double pos = 350;
+	double xspeed = 0;
 }

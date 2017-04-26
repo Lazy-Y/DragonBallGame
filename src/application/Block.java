@@ -1,24 +1,32 @@
 package application;
 
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.MediaPlayer;
 
 public class Block extends Object{
 
+	static Image blockImage = new Image("views/block.png");
+	static MediaPlayer hitWallSound = GameManager.loadMusic("hitWall.mp3");
+	static MediaPlayer beatWallSound = GameManager.loadMusic("beatWall.mp3");
+	
 	public Block(MainController controller) {
 		super(controller);
 		// TODO Auto-generated constructor stub
-		Image image = new Image("views/block.png");
-		this.setImage(image);
+		this.setImage(blockImage);
 	}
 
 	// slow down Goku
 	@Override
 	public void onColide() {
+		if (controller.goku.type == SuperSaiyanType.super4) return;
 		super.onColide();
-		if (controller.xspeed > 0){
+		if (controller.goku.type == SuperSaiyanType.super3){
+			GameManager.playMusic(beatWallSound);
+		}
+		else if (controller.xspeed > 0){
 			controller.xspeed = -500;
 			controller.changeHP(-5);
+			GameManager.playMusic(hitWallSound);
 		}
 	}
 

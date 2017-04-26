@@ -1,12 +1,8 @@
 package application;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,8 +40,12 @@ public class RecordController implements Initializable {
         
 //        RecordData record = new RecordData("Lazy-Y", 100000, 100);
 //        data.add(record);
-        scoreColumn.setComparator(scoreColumn.getComparator().reversed());
         table.setItems(data);
+        table.requestFocus();
+        table.getSelectionModel().select(data.size()-1);
+        table.getFocusModel().focus(data.size()-1);
+        
+        scoreColumn.setComparator(scoreColumn.getComparator().reversed());
         table.getSortOrder().add(scoreColumn);
 	}
 }

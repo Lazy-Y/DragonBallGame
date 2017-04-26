@@ -7,12 +7,15 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
@@ -28,7 +31,10 @@ public class GameManager extends Application {
 	private static AnchorPane recordPane;
 	private static BorderPane pane;
 	private static Stage stage;
-	private static MediaPlayer mediaPlayer;
+	private static MediaPlayer dragonBallPlayer = loadBgMusic("DragonBall.mp3");
+	private static MediaPlayer dragonBallZPlayer = loadBgMusic("DragonBallZ.mp3");
+	private static MediaPlayer dragonBallSuperPlayer = loadBgMusic("DragonBallSuper.mp3");
+	private static MediaPlayer dragonBallGTPlayer = loadBgMusic("DragonBallGT.mp3");
 	static String playerName = "";
 	
 	public static Stage getStage(){
@@ -40,6 +46,9 @@ public class GameManager extends Application {
         FXMLLoader mainLoader = new FXMLLoader();
         mainLoader.setLocation(GameManager.class.getResource("MainPane.fxml"));
         try {
+        		dragonBallGTPlayer.stop();
+	    		dragonBallPlayer.stop();
+	    		dragonBallSuperPlayer.play();
 			playerName = beginController.username.getText();
 			mainPane = (AnchorPane) mainLoader.load();
 			pane.setCenter(mainPane);
@@ -54,6 +63,8 @@ public class GameManager extends Application {
 		FXMLLoader beginLoader = new FXMLLoader();
 		beginLoader.setLocation(GameManager.class.getResource("BeginPane.fxml"));
         try {
+        		dragonBallGTPlayer.stop();
+        		dragonBallPlayer.play();
 			beginPane = (AnchorPane) beginLoader.load();
 	        pane.setCenter(beginPane);
 	        beginController = (BeginController) beginLoader.getController();
@@ -68,6 +79,8 @@ public class GameManager extends Application {
         FXMLLoader recordLoader = new FXMLLoader();
         recordLoader.setLocation(GameManager.class.getResource("RecordPane.fxml"));
         try {
+	    		dragonBallSuperPlayer.stop();
+	    		dragonBallGTPlayer.play();
 			recordPane = (AnchorPane) recordLoader.load();
 			pane.setCenter(recordPane);
 		} catch (IOException e) {
@@ -76,18 +89,38 @@ public class GameManager extends Application {
 		}
 	}
 	
+	static MediaPlayer loadMusic(String name){
+		Media media = new Media(GameManager.class.getResource(name).toString());
+		MediaPlayer player = new MediaPlayer(media);
+		player.setCycleCount(1);
+		player.setAutoPlay(false);
+		if (name.equals("jump.wav")){
+			player.setVolume(0.4);
+		}
+		return player;
+	}
+	
+	static MediaPlayer loadBgMusic(String name){
+		Media media = new Media(GameManager.class.getResource(name).toString());
+		MediaPlayer player = new MediaPlayer(media);
+		player.setCycleCount(MediaPlayer.INDEFINITE);
+		player.setAutoPlay(false);
+		player.setVolume(0.4);
+		return player;
+	}
+	
+	static void playMusic(MediaPlayer player){
+		player.stop();
+		Platform.runLater(()->{
+			player.stop();
+			player.play();
+		});
+	}
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			String path = "bgmusic.mp3";
-			Media media = new Media(GameManager.class.getResource(path).toString());
-			 
-			mediaPlayer = new MediaPlayer(media);
-			mediaPlayer.setAutoPlay(true);
-			mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-			
 			pane = new BorderPane();
-			 
 			reset();
 			
 			Scene scene = new Scene(pane,400,400);
@@ -97,6 +130,7 @@ public class GameManager extends Application {
 			primaryStage.setResizable(false);
 			primaryStage.show();
 			stage = primaryStage;
+			stage.setTitle("Jumping Goku");
 			pane.setFocusTraversable(true);
 			beginController.bindBackgroundImage();
 			
@@ -105,7 +139,15 @@ public class GameManager extends Application {
 		}
 	}
 	
+	static ArrayList<Image> monsterImage = new ArrayList<Image>();
+	static String[] monsterName = {"Cell", "Broli", "Buu", "Frieza", "Zamasu", "Black Goku", 
+			"One Star Dragon", "Frieza", "Super Baby", "Baby", "Cooler", "Buu", "Buu"};
+	
 	public static void main(String[] args) {
+		for (int i = 0; i < 13; i++){
+			monsterImage.add( new Image("views/monster" + i + ".png"));
+		}
+		
 		launch(args);
 	}
 	

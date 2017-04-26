@@ -4,6 +4,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="mainPane" prefHeight="800.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <children>
@@ -12,9 +13,26 @@
             <Image url="@../views/mainBG.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="scoreLabel" layoutX="1218.0" layoutY="14.0" text="score: 0" textFill="WHITE" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="14.0" />
-      <Label fx:id="hpLabel" layoutX="14.0" layoutY="14.0" text="HP: 100/100" textFill="WHITE" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
-      <Label fx:id="killLabel" layoutX="1488.0" layoutY="14.0" text="kill: 0" textFill="WHITE" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="14.0" />
-      <Label fx:id="kameLabel" layoutX="102.0" layoutY="14.0" text="Hame Hame Ha!!!" textFill="RED" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="14.0" />
+      <Label fx:id="scoreLabel" layoutX="1218.0" layoutY="14.0" text="score: 0" textFill="WHITE" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <Label fx:id="hpLabel" layoutX="14.0" layoutY="14.0" text="HP: 100/100" textFill="WHITE" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <Label fx:id="killLabel" layoutX="1385.0" layoutY="14.0" text="kill: 0" textFill="WHITE" AnchorPane.rightAnchor="164.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <Label fx:id="kameLabel" layoutX="169.0" layoutY="15.0" text="Kame Hame Ha!!!" textFill="RED" AnchorPane.leftAnchor="169.0" AnchorPane.topAnchor="15.0">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <Label fx:id="hintLabel" alignment="TOP_LEFT" layoutX="60.0" layoutY="44.0" prefHeight="256.0" prefWidth="916.0" text="Press space to jump. Press J to fire. Press Q to quit." textFill="WHITE" wrapText="true">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

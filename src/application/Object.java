@@ -1,10 +1,13 @@
 package application;
 
-import javafx.animation.FadeTransition;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.util.Duration;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 
 public abstract class Object extends ImageView{
 	
@@ -14,6 +17,8 @@ public abstract class Object extends ImageView{
 	double ySpeed;
 	boolean toBeDestroy = false;
 	MainController controller;
+	Label nameLabel = null;
+	Image image;
 	
 	// randomly generate object at certain position
 	public Object(MainController controller){
@@ -30,8 +35,8 @@ public abstract class Object extends ImageView{
 	}
 	
 	public void render(double deltaTime){
-		double speed = controller.goku.godTicks > 0 ? controller.xspeed * 3 : controller.xspeed;
-		xPos -= deltaTime * speed / 1000;
+		double speed = controller.xspeed;
+		xPos -= deltaTime * (speed + controller.goku.xspeed) / 1000;
 		this.setX(xPos);
 		if (checkCollide()) onColide();
 		yPos += deltaTime * ySpeed / 1000;
@@ -44,16 +49,36 @@ public abstract class Object extends ImageView{
 			ySpeed *= -1;
 		}
 		setY(yPos);
+		updateNameLabel();
+	}
+	
+	void setUpNameLabel(String name, Color color){
+		this.nameLabel = new Label(name);
+		this.nameLabel.setTextFill(color);
+		this.nameLabel.setFont(new Font("Arial", 32));
+		this.controller.mainPane.getChildren().add(this.nameLabel);
+		this.nameLabel.setMinWidth(this.height * image.getWidth() / image.getHeight());
+		this.nameLabel.setTextAlignment(TextAlignment.CENTER);
+		this.nameLabel.setAlignment(Pos.CENTER);
+		this.updateNameLabel();
+	}
+	
+	public void updateNameLabel(){
+		if (nameLabel != null){
+			nameLabel.setTranslateX(xPos);
+			nameLabel.setLayoutY(yPos - 36);
+		}
 	}
 	
 	// check if collide with Goku
 	public Boolean checkCollide(){
-		return (this.getBoundsInParent().intersects(controller.goku.getBoundsInParent()) && controller.goku.godTicks <= 0);
+		SuperSaiyanType type = controller.goku.type;
+		return this.getBoundsInParent().intersects(controller.goku.getBoundsInParent()) && 
+				type != SuperSaiyanType.superGod;
 	}
 	
 	// child class to implement when collide
 	public void onColide(){
-//		destroy();
 		toBeDestroy = true;
 	}
 	
