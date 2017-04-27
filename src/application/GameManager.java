@@ -54,6 +54,8 @@ public class GameManager extends Application {
 			dragonBallSuperPlayer.play();
 			playerName = beginController.username.getText();
 			mainPane = (AnchorPane) mainLoader.load();
+			mainPane.setPrefHeight(windowHeight);
+			mainPane.setPrefWidth(windowWidth);
 			pane.setCenter(mainPane);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -69,8 +71,11 @@ public class GameManager extends Application {
 			dragonBallGTPlayer.stop();
 			dragonBallZPlayer.play();
 			beginPane = (AnchorPane) beginLoader.load();
+			beginPane.setPrefHeight(windowHeight);
+			beginPane.setPrefWidth(windowWidth);
 			pane.setCenter(beginPane);
 			beginController = (BeginController) beginLoader.getController();
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -85,6 +90,8 @@ public class GameManager extends Application {
 			dragonBallZPlayer.stop();
 			dragonBallPlayer.play();
 			infoPane = (AnchorPane) infoLoader.load();
+			infoPane.setPrefHeight(windowHeight);
+			infoPane.setPrefWidth(windowWidth);
 			pane.setCenter(infoPane);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -99,6 +106,8 @@ public class GameManager extends Application {
 			dragonBallSuperPlayer.stop();
 			dragonBallGTPlayer.play();
 			recordPane = (AnchorPane) recordLoader.load();
+			recordPane.setPrefHeight(windowHeight);
+			recordPane.setPrefWidth(windowWidth);
 			pane.setCenter(recordPane);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -141,22 +150,23 @@ public class GameManager extends Application {
 			windowWidth = Screen.getPrimary().getBounds().getWidth();
 			windowHeight = Screen.getPrimary().getBounds().getHeight();
 			
-			windowWidth = Math.min(windowWidth, windowHeight / 2);
-			windowHeight = windowWidth * 2;
+			windowHeight = Math.min(windowWidth / 2, windowHeight);
+			windowWidth = windowHeight * 2;
 			
 			pane = new BorderPane();
+			pane.setPrefHeight(windowHeight);
+			pane.setPrefWidth(windowWidth);
 			reset();
 			Scene scene = new Scene(pane, 400, 400);
 			primaryStage.setScene(scene);
-			primaryStage.setWidth(1600);
-			primaryStage.setHeight(800);
+			primaryStage.setWidth(windowWidth);
+			primaryStage.setHeight(windowHeight);
 			primaryStage.setResizable(false);
 			primaryStage.show();
 			stage = primaryStage;
 			stage.setTitle("Jumping Goku");
 			pane.setFocusTraversable(true);
 			beginController.bindBackgroundImage();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

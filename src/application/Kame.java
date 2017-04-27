@@ -26,19 +26,19 @@ public class Kame extends ImageView {
 		this.objectList = controller.objectList;
 		pane.getChildren().add(this);
 		setImage(kameImage);
-		double baseHeight = 50;
+		double baseHeight = 50 * MainController.heightRatio;
 		switch (goku.type){
 			case normal:
 				this.setFitHeight(1 * baseHeight);
 				break;
 			case super3:
-				this.setFitHeight(4 * baseHeight);
+				this.setFitHeight(3 * baseHeight);
 				break;
 			case super4:
-				this.setFitHeight(5 * baseHeight);
+				this.setFitHeight(4 * baseHeight);
 				break;
 			case superGod:
-				this.setFitHeight(6 * baseHeight);
+				this.setFitHeight(5 * baseHeight);
 				break;
 			default:
 				this.setFitHeight(2 * baseHeight);

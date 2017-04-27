@@ -23,8 +23,12 @@ public class Block extends Object{
 		if (controller.goku.type == SuperSaiyanType.super3 || controller.goku.type == SuperSaiyanType.superGod){
 			GameManager.playMusic(beatWallSound);
 		}
+		else if (controller.goku.xPos > this.xPos - 30 * MainController.widthRatio){
+			controller.goku.yspeed *= -1;
+			GameManager.playMusic(beatWallSound);
+		}
 		else if (controller.xspeed > 0){
-			controller.xspeed = -500;
+			controller.xspeed = -(500 * MainController.widthRatio + controller.goku.xspeed);
 			controller.changeHP(-5);
 			GameManager.playMusic(hitWallSound);
 		}

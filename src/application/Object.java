@@ -23,9 +23,9 @@ public abstract class Object extends ImageView{
 	public Object(MainController controller){
 		super();
 		this.controller = controller;
-		height = Math.random() * 200 + 300;
-		xPos = 1600;
-		yPos = Math.random() * (800 - height);
+		height = (Math.random() * 200 + 300) * MainController.heightRatio;
+		xPos = GameManager.windowWidth;
+		yPos = Math.random() * (GameManager.windowHeight - height);
 		ySpeed = controller.ySpeed * ((Math.random() > 0) ? 1 : -1);
 		this.setFitHeight(height);
 		this.setX(xPos);
@@ -43,8 +43,8 @@ public abstract class Object extends ImageView{
 			ySpeed *= -1;
 			yPos = 0;
 		}
-		if (yPos + height > 800){
-			yPos = 800 - height;
+		if (yPos + height > GameManager.windowHeight){
+			yPos = GameManager.windowHeight - height;
 			ySpeed *= -1;
 		}
 		setY(yPos);
@@ -65,7 +65,7 @@ public abstract class Object extends ImageView{
 	public void updateNameLabel(){
 		if (nameLabel != null){
 			nameLabel.setTranslateX(xPos);
-			nameLabel.setLayoutY(yPos - 36);
+			nameLabel.setLayoutY(yPos - 36.0 * MainController.heightRatio);
 		}
 	}
 	

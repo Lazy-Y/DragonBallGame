@@ -1,8 +1,11 @@
 package application;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.Timeline;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 public class Goku extends ImageView{
 	
@@ -14,6 +17,15 @@ public class Goku extends ImageView{
 	static MediaPlayer superGodSound = GameManager.loadMusic("god.mp3");
 	static MediaPlayer jumpSound = GameManager.loadMusic("jump.mp3");
 	
+	static double normalHeight = 100.0 * MainController.heightRatio;
+	static double superIHeight = 120.0 * MainController.heightRatio;
+	static double superIIHeight = 150.0 * MainController.heightRatio;
+	static double superIIIHeight = 200.0 * MainController.heightRatio;
+	static double superIVHeight = 300.0 * MainController.heightRatio;
+	static double superGodHeight = 400.0 * MainController.heightRatio;
+	
+	FadeTransition flashAnimation = null;
+	
 	void setGokuImage(){
 		this.setImage(SuperSaiyan.gokuImage);
 	}
@@ -22,44 +34,54 @@ public class Goku extends ImageView{
 		super();
 		type = SuperSaiyanType.normal;
 		setGokuImage();
-		this.setFitHeight(100);
+		this.setFitHeight(normalHeight);
 		this.setPreserveRatio(true);
 		this.controller = controller;
 		this.mainPane = controller.mainPane;
 		mainPane.getChildren().add(this);
-		this.setX(50);
-		this.setY(pos);
+		this.setX(xPos);
+		this.setY(yPos);
 	}
 	
 	void render(double deltaTime){
 		yspeed += gravity * deltaTime / 1000;
-		pos += yspeed * deltaTime / 1000;
-		double yPosMax = 680;
+		yPos += yspeed * deltaTime / 1000;
+		double yPosMax = 0;
 		switch (type){
-			case normal: yPosMax = 680; break;
-			case super1: yPosMax = 660; break;
-			case super2: yPosMax = 630; break;
-			case super3: yPosMax = 580; break;
-			case super4: yPosMax = 480; break;
-			case superGod: yPosMax = 380; break;
+			case normal: yPosMax = GameManager.windowHeight - normalHeight - 20 * MainController.heightRatio; break;
+			case super1: yPosMax = GameManager.windowHeight - superIHeight - 20 * MainController.heightRatio; break;
+			case super2: yPosMax = GameManager.windowHeight - superIIHeight - 20 * MainController.heightRatio; break;
+			case super3: yPosMax = GameManager.windowHeight - superIIIHeight - 20 * MainController.heightRatio; break;
+			case super4: yPosMax = GameManager.windowHeight - superIVHeight - 20 * MainController.heightRatio; break;
+			case superGod: yPosMax = GameManager.windowHeight - superGodHeight - 20 * MainController.heightRatio; break;
 		}
-		if (pos > yPosMax){
-			pos = yPosMax;
+		if (yPos > yPosMax){
+			yPos = yPosMax;
 			yspeed = 0;
 		}
-		if (pos < 0){
-			pos = 0;
+		if (yPos < 0){
+			yPos = 0;
 			yspeed = 0;
 		}
-		setY(pos);
+		setY(yPos);
 		
 		if (superTicks > 0){
 			superTicks -= deltaTime;
+			if (superTicks < 2000 && flashAnimation == null){
+				flashAnimation = new FadeTransition(Duration.millis(250), this);
+				flashAnimation.setFromValue(1.0);
+				flashAnimation.setToValue(0.3);
+				flashAnimation.setCycleCount(Timeline.INDEFINITE);
+				flashAnimation.setAutoReverse(true);
+				flashAnimation.play();
+			}
 			if (superTicks <= 0){
 				type = SuperSaiyanType.normal;
-				this.setFitHeight(100);
+				this.setFitHeight(normalHeight);
 				setGokuImage();
 				xspeed = 0;
+				flashAnimation.stop();
+				flashAnimation = null;
 			}
 		}
 		
@@ -112,36 +134,41 @@ public class Goku extends ImageView{
 		controller.hintDisplayTime = 3000;
 		controller.goku.coolingTicks = 0;
 		controller.goku.superTicks = 7000;
+		if (flashAnimation != null){
+			this.setOpacity(1);
+			flashAnimation.stop();
+			flashAnimation = null;
+		}
 		switch (type){
 			case super1:
 				GameManager.playMusic(super1Sound);
 				xspeed = 0;
-				this.setFitHeight(120);
+				this.setFitHeight(superIHeight);
 				controller.hintLabel.setText("Super Saiyan I!\n" + superSaiyanIInfo);
 				break;
 			case super2:
 				GameManager.playMusic(super2Sound);
-				xspeed = -400;
-				this.setFitHeight(150);
+				xspeed = - controller.xspeed * 0.5;
+				this.setFitHeight(superIIHeight);
 				controller.hintLabel.setText("Super Saiyan II!\n" + superSaiyanIIInfo);
 				break;
 			case super3:
 				GameManager.playMusic(super3Sound);
 				xspeed = 0;
-				this.setFitHeight(200);
+				this.setFitHeight(superIIIHeight);
 				controller.hintLabel.setText("Super Saiyan III!\n" + superSaiyanIIIInfo);
 				break;
 			case super4:
 				GameManager.playMusic(super4Sound);
-				xspeed = 300;
-				this.setFitHeight(300);
+				xspeed = 300 * MainController.widthRatio;
+				this.setFitHeight(superIVHeight);
 				controller.hintLabel.setText("Super Saiyan IV!\n" + superSaiyanIVInfo);
 				break;
 			case superGod:
 				GameManager.playMusic(super4Sound);
 				GameManager.playMusic(superGodSound);
-				xspeed = 800;
-				this.setFitHeight(400);
+				xspeed = 800 * MainController.widthRatio;
+				this.setFitHeight(superGodHeight);
 				controller.hintLabel.setText("SUPER SAIYAN GOD!!!\n" + superSaiyanGodInfo);
 			default:
 				break;
@@ -156,9 +183,10 @@ public class Goku extends ImageView{
 	
 	MainController controller;
 	AnchorPane mainPane;
-	double jumpHeight = 1000;
+	double jumpHeight = 1000 * MainController.heightRatio;
 	double yspeed = 0;
-	double gravity = 2500;
-	double pos = 350;
+	double gravity = 2500 * MainController.heightRatio;
+	double yPos = 350 * MainController.heightRatio;
+	double xPos = 50 * MainController.widthRatio;
 	double xspeed = 0;
 }

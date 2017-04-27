@@ -27,9 +27,13 @@ public class Monster extends Object {
 		if (controller.goku.type == SuperSaiyanType.super3 || controller.goku.type == SuperSaiyanType.superGod){
 			controller.kill();
 		}
+		else if (controller.goku.xPos > this.xPos - 30 * MainController.widthRatio){
+			controller.goku.yspeed *= -1;
+			controller.kill();
+		}
 		else if (controller.xspeed > 0){
 			controller.changeHP(-20);
-			controller.xspeed = -1000;
+			controller.xspeed = -(1000 * MainController.widthRatio + controller.goku.xspeed);
 			GameManager.playMusic(hitMonsterSound);
 		}
 	}

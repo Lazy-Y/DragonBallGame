@@ -23,13 +23,16 @@ public class MainController {
 	@FXML Label killLabel;
 	@FXML ImageView kameIndicator;
 	@FXML Label hintLabel;
+	@FXML ImageView background;
 
 	Goku goku;
-	LinkedList<Object> objectList = new LinkedList<Object>(); 
+	LinkedList<Object> objectList = new LinkedList<Object>();
+	static double widthRatio = GameManager.windowWidth / 1600.0;
+	static double heightRatio = GameManager.windowHeight / 800.0;
 	double xspeed = 0;
-	double maxSpeed = 500;
-	double acc = 500;
-	double spacing = 500;
+	double maxSpeed = 500 * widthRatio;
+	double acc = 500 * widthRatio;
+	double spacing = 500 * widthRatio;
 	int hp = 100;
 	int killCount = 0;
 	int score = 0;
@@ -39,6 +42,8 @@ public class MainController {
 	AnimationTimer mainAnimation;
 
 	@FXML private void initialize() {
+		background.setFitWidth(GameManager.windowWidth);
+		
 		goku = new Goku(this);
 		mainPane.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent ke) {
@@ -92,10 +97,10 @@ public class MainController {
 				if (objectList.isEmpty()) spawn();
 				else{
 					Object last = objectList.get(objectList.size() - 1);
-					if (1600 - (last.xPos + last.getFitHeight()) > spacing) spawn();
+					if (GameManager.windowWidth - (last.xPos + last.getFitHeight()) > spacing) spawn();
 				}
 				Object first = objectList.getFirst();
-				if (first.xPos < -1200) removeObj(first);
+				if (first.xPos < -GameManager.windowWidth) removeObj(first);
 				for (Object obj : objectList) obj.render(deltaTime);
 				for (int i = 0; i < objectList.size(); i++){
 					Object obj = objectList.get(i);
@@ -109,10 +114,10 @@ public class MainController {
 //				goku.gravity += 0.1;
 //				goku.jumpHeight += 0.02;
 
-				maxSpeed += 5.0 * deltaTime / 1000.0;
-				ySpeed += 1.5 * deltaTime / 1000.0;
-				goku.gravity += 25.0 * deltaTime / 1000.0;
-				goku.jumpHeight += 10.0 * deltaTime / 1000.0;
+				maxSpeed += 5.0 * deltaTime / 1000.0 * widthRatio;
+				ySpeed += 1 * deltaTime / 1000.0 * heightRatio;
+				goku.gravity += 25.0 * deltaTime / 1000.0 * heightRatio;
+				goku.jumpHeight += 10.0 * deltaTime / 1000.0 * heightRatio;
 				if (goku.coolingTicks <= 0) kameIndicator.setBlendMode(BlendMode.SRC_OVER);
 				else kameIndicator.setBlendMode(BlendMode.MULTIPLY);
 			}
@@ -147,9 +152,12 @@ public class MainController {
 	}
 	
 	void removeObj(Object obj){
-		if (obj.nameLabel != null) mainPane.getChildren().remove(obj.nameLabel);
-		objectList.remove(obj);
-		mainPane.getChildren().remove(obj);
+		if (obj.xPos < GameManager.windowWidth){
+			if (obj.nameLabel != null) mainPane.getChildren().remove(obj.nameLabel);
+			objectList.remove(obj);
+			mainPane.getChildren().remove(obj);
+		}
+		else obj.setVisible(false);
 	}
 	
 	void endGame(){

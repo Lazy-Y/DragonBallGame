@@ -10,27 +10,27 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.BeginController">
    <children>
-      <ImageView fx:id="background" fitWidth="1600.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fx:id="background" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@../views/beginBG.png" />
          </image>
       </ImageView>
-      <TextField fx:id="username" layoutX="252.0" layoutY="458.0" promptText="Username">
+      <TextField fx:id="username" layoutX="256.0" layoutY="450.0" prefHeight="60.0" prefWidth="410.0" promptText="Username">
          <font>
-            <Font size="32.0" />
+            <Font size="24.0" />
          </font>
       </TextField>
-      <Button layoutX="252.0" layoutY="551.0" minHeight="60.0" minWidth="200.0" mnemonicParsing="false" onAction="#startGame" prefHeight="60.0" prefWidth="200.0" text="Begin">
+      <Button fx:id="beginButton" layoutX="250.0" layoutY="550.0" mnemonicParsing="false" onAction="#startGame" prefHeight="60.0" prefWidth="200.0" text="Begin">
          <font>
-            <Font size="32.0" />
+            <Font size="24.0" />
          </font>
       </Button>
-      <Button layoutX="462.0" layoutY="551.0" minHeight="60.0" minWidth="200.0" mnemonicParsing="false" onAction="#showInfo" prefHeight="60.0" prefWidth="200.0" text="Info">
+      <Button fx:id="infoButton" layoutX="464.0" layoutY="550.0" mnemonicParsing="false" onAction="#showInfo" prefHeight="60.0" prefWidth="200.0" text="Info">
          <font>
-            <Font size="32.0" />
+            <Font size="24.0" />
          </font>
       </Button>
-      <Label alignment="BOTTOM_LEFT" prefHeight="128.0" prefWidth="500.0" text="Developed by Zhenyang Zhong zhenyanz@lazy-y.com" textFill="#c3c3c3" wrapText="true" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
+      <Label fx:id="declarationLabel" alignment="BOTTOM_LEFT" layoutX="14.0" layoutY="1000.0" prefHeight="128.0" prefWidth="500.0" text="Developed by Zhenyang Zhong zhenyanz@lazy-y.com" textFill="#c3c3c3" wrapText="true">
          <font>
             <Font size="32.0" />
          </font>

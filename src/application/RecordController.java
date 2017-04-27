@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.image.ImageView;
 
 public class RecordController implements Initializable {
 	
@@ -19,6 +20,7 @@ public class RecordController implements Initializable {
     @FXML TableColumn<RecordData, String> nameColumn;
     @FXML TableColumn<RecordData, Number> scoreColumn;
     @FXML TableColumn<RecordData, Number> killColumn;
+    @FXML ImageView background;
 	
 	@FXML void restartAction(ActionEvent action){
 		GameManager.begin();
@@ -31,7 +33,8 @@ public class RecordController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-
+		background.setFitWidth(GameManager.windowWidth);
+		
         nameColumn.setCellValueFactory(cellData -> cellData.getValue().name);
         scoreColumn.setCellValueFactory(cellData -> cellData.getValue().score);
         killColumn.setCellValueFactory(cellData -> cellData.getValue().kill);
