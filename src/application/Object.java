@@ -1,7 +1,6 @@
 package application;
 
 import javafx.geometry.Pos;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -72,9 +71,7 @@ public abstract class Object extends ImageView{
 	
 	// check if collide with Goku
 	public Boolean checkCollide(){
-		SuperSaiyanType type = controller.goku.type;
-		return this.getBoundsInParent().intersects(controller.goku.getBoundsInParent()) && 
-				type != SuperSaiyanType.superGod;
+		return this.getBoundsInParent().intersects(controller.goku.getBoundsInParent());
 	}
 	
 	// child class to implement when collide

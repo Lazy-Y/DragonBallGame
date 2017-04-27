@@ -37,9 +37,6 @@ public class RecordController implements Initializable {
         killColumn.setCellValueFactory(cellData -> cellData.getValue().kill);
 
         ObservableList<RecordData> data = GameManager.getRecords();
-        
-//        RecordData record = new RecordData("Lazy-Y", 100000, 100);
-//        data.add(record);
         table.setItems(data);
         table.requestFocus();
         table.getSelectionModel().select(data.size()-1);

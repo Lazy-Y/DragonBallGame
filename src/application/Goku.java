@@ -1,9 +1,7 @@
 package application;
 
-import javafx.application.Platform;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 public class Goku extends ImageView{
@@ -14,7 +12,7 @@ public class Goku extends ImageView{
 	static MediaPlayer super3Sound = GameManager.loadMusic("saiyan3.mp3");
 	static MediaPlayer super4Sound = GameManager.loadMusic("saiyan4.mp3");
 	static MediaPlayer superGodSound = GameManager.loadMusic("god.mp3");
-	static MediaPlayer jumpSound = GameManager.loadMusic("jump.wav");
+	static MediaPlayer jumpSound = GameManager.loadMusic("jump.mp3");
 	
 	void setGokuImage(){
 		this.setImage(SuperSaiyan.gokuImage);
@@ -103,12 +101,12 @@ public class Goku extends ImageView{
 		}
 	}
 	
-	static String childGokuInfo = "Slow cooling time\nSmall kame";
-	static String superSaiyanIInfo = "Medium Kame\nMedium cooling time";
-	static String superSaiyanIIInfo = "Medium Kame\nSlow Motion";
-	static String superSaiyanIIIInfo = "Destroy everything if hitten\nLarge Kame";
-	static String superSaiyanIVInfo =  "Pass through everything\nX-large Kame";
-	static String superSaiyanGodInfo = "Pass through everything\nMega-large Kame";
+	static String childGokuInfo = "- Small kame\n- Long cooling time\n- Medium speed";
+	static String superSaiyanIInfo = "- Medium kame\n- Medium cooling time\n- Medium speed";
+	static String superSaiyanIIInfo = "- Medium kame\n- Medium cooling time\n- Slow speed";
+	static String superSaiyanIIIInfo = "- Destroy everything if hitten\n- Large kame\n- Medium cooling time\n- Mediu speed";
+	static String superSaiyanIVInfo =  "- Pass through everything\n- X-large kame\n- Short cooling time\n- Fast speed";
+	static String superSaiyanGodInfo = "- Destroy everything if hitten\n- Mega-large kame\n- Short cooling time\n- Fastest speed";
 	void superMode(SuperSaiyanType type){
 		controller.hintLabel.setVisible(true);
 		controller.hintDisplayTime = 3000;
@@ -130,7 +128,7 @@ public class Goku extends ImageView{
 				break;
 			case super3:
 				GameManager.playMusic(super3Sound);
-				superTicks = 5000;
+				superTicks = 10000;
 				xspeed = 0;
 				this.setFitHeight(200);
 				controller.hintLabel.setText("Super Saiyan III!\n" + superSaiyanIIIInfo);

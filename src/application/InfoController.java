@@ -19,7 +19,7 @@ public class InfoController {
 		gokuChildLabel.setText(Goku.childGokuInfo);
 		superSaiyanILabel.setText(Goku.superSaiyanIInfo);
 		superSaiyanIILabel.setText(Goku.superSaiyanIIInfo);
-		superSaiyanIIILabel.setText(Goku.superSaiyanIIInfo);
+		superSaiyanIIILabel.setText(Goku.superSaiyanIIIInfo);
 		superSaiyanIVLabel.setText(Goku.superSaiyanIVInfo);
 		superSaiyanGodLabel.setText(Goku.superSaiyanGodInfo);
 		infoPane.setOnKeyPressed(new EventHandler<KeyEvent>() {

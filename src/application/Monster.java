@@ -24,7 +24,7 @@ public class Monster extends Object {
 		// TODO Auto-generated method stub
 		if (controller.goku.type == SuperSaiyanType.super4) return;
 		super.onColide();
-		if (controller.goku.type == SuperSaiyanType.super3){
+		if (controller.goku.type == SuperSaiyanType.super3 || controller.goku.type == SuperSaiyanType.superGod){
 			controller.kill();
 		}
 		else if (controller.xspeed > 0){

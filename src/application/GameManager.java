@@ -1,5 +1,5 @@
 package application;
-	
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -22,9 +22,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
-
 public class GameManager extends Application {
-	
+
 	private static AnchorPane beginPane;
 	private static BeginController beginController;
 	private static AnchorPane mainPane;
@@ -37,19 +36,19 @@ public class GameManager extends Application {
 	private static MediaPlayer dragonBallSuperPlayer = loadBgMusic("DragonBallSuper.mp3");
 	private static MediaPlayer dragonBallGTPlayer = loadBgMusic("DragonBallGT.mp3");
 	static String playerName = "";
-	
-	public static Stage getStage(){
+
+	public static Stage getStage() {
 		return stage;
 	}
-	
+
 	// begin game
-	public static void begin(){
-        FXMLLoader mainLoader = new FXMLLoader();
-        mainLoader.setLocation(GameManager.class.getResource("MainPane.fxml"));
-        try {
-        		dragonBallGTPlayer.stop();
-	    		dragonBallZPlayer.stop();
-	    		dragonBallSuperPlayer.play();
+	public static void begin() {
+		FXMLLoader mainLoader = new FXMLLoader();
+		mainLoader.setLocation(GameManager.class.getResource("MainPane.fxml"));
+		try {
+			dragonBallGTPlayer.stop();
+			dragonBallZPlayer.stop();
+			dragonBallSuperPlayer.play();
 			playerName = beginController.username.getText();
 			mainPane = (AnchorPane) mainLoader.load();
 			pane.setCenter(mainPane);
@@ -58,30 +57,30 @@ public class GameManager extends Application {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void reset(){
+
+	public static void reset() {
 		FXMLLoader beginLoader = new FXMLLoader();
 		beginLoader.setLocation(GameManager.class.getResource("BeginPane.fxml"));
-        try {
-        		dragonBallPlayer.stop();
-        		dragonBallGTPlayer.stop();
-        		dragonBallZPlayer.play();
+		try {
+			dragonBallPlayer.stop();
+			dragonBallGTPlayer.stop();
+			dragonBallZPlayer.play();
 			beginPane = (AnchorPane) beginLoader.load();
-	        pane.setCenter(beginPane);
-	        beginController = (BeginController) beginLoader.getController();
+			pane.setCenter(beginPane);
+			beginController = (BeginController) beginLoader.getController();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        		
+
 	}
-	
-	public static void showInfo(){
+
+	public static void showInfo() {
 		FXMLLoader infoLoader = new FXMLLoader();
 		infoLoader.setLocation(GameManager.class.getResource("InfoPane.fxml"));
-        try {
-	    		dragonBallZPlayer.stop();
-	    		dragonBallPlayer.play();
+		try {
+			dragonBallZPlayer.stop();
+			dragonBallPlayer.play();
 			infoPane = (AnchorPane) infoLoader.load();
 			pane.setCenter(infoPane);
 		} catch (IOException e) {
@@ -89,13 +88,13 @@ public class GameManager extends Application {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void endGame(){
-        FXMLLoader recordLoader = new FXMLLoader();
-        recordLoader.setLocation(GameManager.class.getResource("RecordPane.fxml"));
-        try {
-	    		dragonBallSuperPlayer.stop();
-	    		dragonBallGTPlayer.play();
+
+	public static void endGame() {
+		FXMLLoader recordLoader = new FXMLLoader();
+		recordLoader.setLocation(GameManager.class.getResource("RecordPane.fxml"));
+		try {
+			dragonBallSuperPlayer.stop();
+			dragonBallGTPlayer.play();
 			recordPane = (AnchorPane) recordLoader.load();
 			pane.setCenter(recordPane);
 		} catch (IOException e) {
@@ -103,41 +102,42 @@ public class GameManager extends Application {
 			e.printStackTrace();
 		}
 	}
-	
-	static MediaPlayer loadMusic(String name){
+
+	static MediaPlayer loadMusic(String name) {
 		Media media = new Media(GameManager.class.getResource(name).toString());
 		MediaPlayer player = new MediaPlayer(media);
 		player.setCycleCount(1);
 		player.setAutoPlay(false);
-		if (name.equals("jump.wav")){
+		if (name.equals("jump.mp3")) {
 			player.setVolume(0.4);
 		}
 		return player;
 	}
-	
-	static MediaPlayer loadBgMusic(String name){
-		Media media = new Media(GameManager.class.getResource(name).toString());
+
+	static MediaPlayer loadBgMusic(String name) {
+		String path = GameManager.class.getResource(name).toString();
+		Media media = new Media(path);
 		MediaPlayer player = new MediaPlayer(media);
 		player.setCycleCount(MediaPlayer.INDEFINITE);
 		player.setAutoPlay(false);
 		player.setVolume(0.4);
 		return player;
 	}
-	
-	static void playMusic(MediaPlayer player){
+
+	static void playMusic(MediaPlayer player) {
 		player.stop();
-		Platform.runLater(()->{
+		Platform.runLater(() -> {
 			player.stop();
 			player.play();
 		});
 	}
-	
+
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			pane = new BorderPane();
 			reset();
-			Scene scene = new Scene(pane,400,400);
+			Scene scene = new Scene(pane, 400, 400);
 			primaryStage.setScene(scene);
 			primaryStage.setWidth(1600);
 			primaryStage.setHeight(800);
@@ -147,33 +147,35 @@ public class GameManager extends Application {
 			stage.setTitle("Jumping Goku");
 			pane.setFocusTraversable(true);
 			beginController.bindBackgroundImage();
-			
-		} catch(Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	static ArrayList<Image> monsterImage = new ArrayList<Image>();
-	static String[] monsterName = {"Cell", "Broli", "Buu", "Frieza", "Zamasu", "Black Goku", 
-			"One Star Dragon", "Frieza", "Super Baby", "Baby", "Cooler", "Buu", "Buu"};
-	
+	static String[] monsterName = { "Cell", "Broli", "Buu", "Frieza", "Zamasu", "Black Goku", "One Star Dragon",
+			"Frieza", "Super Baby", "Baby", "Cooler", "Buu", "Buu" };
+
 	public static void main(String[] args) {
-		for (int i = 0; i < 13; i++){
-			monsterImage.add( new Image("views/monster" + i + ".png"));
+		for (int i = 0; i < 13; i++) {
+			String path = GameManager.class.getResource("/views/monster" + i + ".png").toString();
+			monsterImage.add(new Image(path));
 		}
-		
+
 		launch(args);
 	}
-	
-	public static void addRecord(int score, int kill){
+
+	public static void addRecord(int score, int kill) {
+		if (playerName == null || playerName.length() == 0) return;
 		BufferedWriter bw = null;
 		FileWriter fw = null;
 		try {
 			String data = playerName + "," + String.valueOf(score) + "," + String.valueOf(kill) + "\n";
 			File file = new File("record.csv");
 			// if file doesnt exists, then create it
-			if (!file.exists()) file.createNewFile();
+			if (!file.exists())
+				file.createNewFile();
 			// true = append file
 			fw = new FileWriter(file.getAbsoluteFile(), true);
 			bw = new BufferedWriter(fw);
@@ -191,34 +193,34 @@ public class GameManager extends Application {
 			}
 		}
 	}
-	
-	public static ObservableList<RecordData> getRecords(){
-        ObservableList<RecordData> data = FXCollections.observableArrayList();
-        String csvFile = "record.csv";
-        BufferedReader br = null;
-        String line = "";
-        String cvsSplitBy = ",";
-        try {
-            br = new BufferedReader(new FileReader(csvFile));
-            while ((line = br.readLine()) != null) {
-                // use comma as separator
-                String[] lineData = line.split(cvsSplitBy);
-                data.add(new RecordData(lineData[0], Integer.valueOf(lineData[1]), Integer.valueOf(lineData[2])));
-            }
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }   
-        return data;
+	public static ObservableList<RecordData> getRecords() {
+		ObservableList<RecordData> data = FXCollections.observableArrayList();
+		String csvFile = "record.csv";
+		BufferedReader br = null;
+		String line = "";
+		String cvsSplitBy = ",";
+		try {
+			br = new BufferedReader(new FileReader(csvFile));
+			while ((line = br.readLine()) != null) {
+				// use comma as separator
+				String[] lineData = line.split(cvsSplitBy);
+				data.add(new RecordData(lineData[0], Integer.valueOf(lineData[1]), Integer.valueOf(lineData[2])));
+			}
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return data;
 	}
 }

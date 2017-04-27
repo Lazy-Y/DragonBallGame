@@ -14,7 +14,7 @@ public class Kame extends ImageView {
 	private double fireTicks = 300;
 	private List<Object> objectList;
 	private MainController controller;
-	static Image kameImage = new Image("views/kame.png");
+	static Image kameImage = new Image(SuperSaiyan.class.getResource("/views/kame.png").toString());
 	static MediaPlayer kameSound = GameManager.loadMusic("kame.mp3");
 	
 	public Kame(MainController controller){
@@ -26,31 +26,32 @@ public class Kame extends ImageView {
 		this.objectList = controller.objectList;
 		pane.getChildren().add(this);
 		setImage(kameImage);
+		double baseHeight = 50;
 		switch (goku.type){
 			case normal:
-				this.setFitHeight(10);
+				this.setFitHeight(1 * baseHeight);
 				break;
 			case super3:
-				this.setFitHeight(40);
+				this.setFitHeight(4 * baseHeight);
 				break;
 			case super4:
-				this.setFitHeight(50);
+				this.setFitHeight(5 * baseHeight);
 				break;
 			case superGod:
-				this.setFitHeight(60);
+				this.setFitHeight(6 * baseHeight);
 				break;
 			default:
-				this.setFitHeight(20);
+				this.setFitHeight(2 * baseHeight);
 				break;
 		}
 		this.setPreserveRatio(true);
-		this.setX(goku.getX() + 100);
-		this.setY(goku.getY() + goku.getFitHeight() / 2);
+		this.setX(goku.getX() + goku.getFitHeight() * 3 / 4);
+		this.setY(goku.getY() + goku.getFitHeight() / 4);
 	}
 	
 	void render(double deltaTime){
-		this.setX(goku.getX() + 100);
-		this.setY(goku.getY() + goku.getFitHeight() / 2);
+		this.setX(goku.getX() + goku.getFitHeight() * 3 / 4);
+		this.setY(goku.getY() + goku.getFitHeight() / 4);
 		fireTicks -= deltaTime;
 		if (fireTicks <= 0) destroy();
 		Object obj_to_destroy = null;

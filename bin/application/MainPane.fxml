@@ -25,14 +25,15 @@
          <font>
             <Font size="20.0" />
          </font></Label>
-      <Label fx:id="kameLabel" layoutX="169.0" layoutY="15.0" text="Kame Hame Ha!!!" textFill="RED" AnchorPane.leftAnchor="169.0" AnchorPane.topAnchor="15.0">
-         <font>
-            <Font size="20.0" />
-         </font></Label>
       <Label fx:id="hintLabel" alignment="TOP_LEFT" layoutX="60.0" layoutY="44.0" prefHeight="256.0" prefWidth="916.0" text="Press space to jump. Press J to fire. Press Q to quit." textFill="WHITE" wrapText="true">
          <font>
             <Font size="40.0" />
          </font>
       </Label>
+      <ImageView fx:id="kameIndicator" fitHeight="50.0" fitWidth="142.0" layoutX="149.0" layoutY="2.0" pickOnBounds="true">
+         <image>
+            <Image url="@../views/kame.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

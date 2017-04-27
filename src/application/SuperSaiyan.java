@@ -1,7 +1,6 @@
 package application;
 
 import javafx.scene.image.Image;
-import javafx.scene.media.Media;
 import javafx.scene.paint.Color;
 
 enum SuperSaiyanType{
@@ -41,15 +40,15 @@ public class SuperSaiyan extends Object {
 	public void onColide() {
 		// TODO Auto-generated method stub
 		super.onColide();
-		controller.goku.superMode(type);
+		if (type == SuperSaiyanType.superGod || controller.goku.type != SuperSaiyanType.superGod) controller.goku.superMode(type);
 	}
 
-	static Image gokuImage = new Image("views/goku.png");
-	static Image super1Image = new Image("views/super1.png");
-	static Image super2Image = new Image("views/super2.png");
-	static Image super3Image = new Image("views/super3.png");
-	static Image super4Image = new Image("views/super4.png");
-	static Image superGodImage = new Image("views/superGod.png");
+	static Image gokuImage = new Image(SuperSaiyan.class.getResource("/views/goku.png").toString());
+	static Image super1Image = new Image(SuperSaiyan.class.getResource("/views/super1.png").toString());
+	static Image super2Image = new Image(SuperSaiyan.class.getResource("/views/super2.png").toString());
+	static Image super3Image = new Image(SuperSaiyan.class.getResource("/views/super3.png").toString());
+	static Image super4Image = new Image(SuperSaiyan.class.getResource("/views/super4.png").toString());
+	static Image superGodImage = new Image(SuperSaiyan.class.getResource("/views/superGod.png").toString());
 
 	static Image loadImage(SuperSaiyanType type){
 		switch (type){

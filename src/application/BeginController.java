@@ -26,7 +26,6 @@ public class BeginController {
 	}
 
 	public void bindBackgroundImage(){
-		System.out.println(background);
 		Stage stage = GameManager.getStage();
 		background.fitWidthProperty().bind(stage.widthProperty());
 	}

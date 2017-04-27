@@ -9,10 +9,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 
 public class MainController {
 	
@@ -20,7 +21,7 @@ public class MainController {
 	@FXML Label scoreLabel;
 	@FXML Label hpLabel;
 	@FXML Label killLabel;
-	@FXML Label kameLabel;
+	@FXML ImageView kameIndicator;
 	@FXML Label hintLabel;
 
 	Goku goku;
@@ -105,8 +106,8 @@ public class MainController {
 				}
 				maxSpeed += 0.15;
 				ySpeed += 0.02;
-				if (goku.coolingTicks <= 0) kameLabel.setTextFill(Color.web("#00FF00"));
-				else kameLabel.setTextFill(Color.web("#FF0000"));
+				if (goku.coolingTicks <= 0) kameIndicator.setBlendMode(BlendMode.SRC_OVER);
+				else kameIndicator.setBlendMode(BlendMode.MULTIPLY);
 			}
 		};
 		mainAnimation.start();
@@ -126,6 +127,14 @@ public class MainController {
 		else if (rand < 0.99) obj = new SuperSaiyan(this, SuperSaiyanType.super3);
 		else if (rand < 0.997) obj = new SuperSaiyan(this, SuperSaiyanType.super4);
 		else obj = new SuperSaiyan(this, SuperSaiyanType.superGod);
+
+//		if (rand < 0.2) obj = new Block(this);
+//		else if (rand < 0.3) obj = new Monster(this);
+//		else if (rand < 0.4) obj = new SuperSaiyan(this, SuperSaiyanType.super1);
+//		else if (rand < 0.5) obj = new SuperSaiyan(this, SuperSaiyanType.super2);
+//		else if (rand < 0.6) obj = new SuperSaiyan(this, SuperSaiyanType.super3);
+//		else if (rand < 0.7) obj = new SuperSaiyan(this, SuperSaiyanType.super4);
+//		else obj = new SuperSaiyan(this, SuperSaiyanType.superGod);
 		objectList.add(objectList.size(), obj);
 		mainPane.getChildren().add(obj);
 	}
