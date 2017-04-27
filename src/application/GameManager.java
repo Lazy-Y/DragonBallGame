@@ -164,7 +164,7 @@ public class GameManager extends Application {
 			primaryStage.setResizable(false);
 			primaryStage.show();
 			stage = primaryStage;
-			stage.setTitle("Jumping Goku");
+			stage.setTitle("Super Dragon Ball");
 			pane.setFocusTraversable(true);
 			beginController.bindBackgroundImage();
 		} catch (Exception e) {

@@ -126,9 +126,9 @@ public class Goku extends ImageView{
 	static String childGokuInfo = "- Small kame\n- Long cooling time\n- Medium speed";
 	static String superSaiyanIInfo = "- Medium kame\n- Medium cooling time\n- Medium speed";
 	static String superSaiyanIIInfo = "- Medium kame\n- Medium cooling time\n- Slow speed";
-	static String superSaiyanIIIInfo = "- Destroy everything if hitten\n- Large kame\n- Medium cooling time\n- Mediu speed";
+	static String superSaiyanIIIInfo = "- Destroy everything if hit\n- Large kame\n- Medium cooling time\n- Mediu speed";
 	static String superSaiyanIVInfo =  "- Pass through everything\n- X-large kame\n- Short cooling time\n- Fast speed";
-	static String superSaiyanGodInfo = "- Destroy everything if hitten\n- Mega-large kame\n- Short cooling time\n- Fastest speed";
+	static String superSaiyanGodInfo = "- Destroy everything if hit\n- Mega-large kame\n- Short cooling time\n- Fastest speed";
 	void superMode(SuperSaiyanType type){
 		controller.hintLabel.setVisible(true);
 		controller.hintDisplayTime = 3000;
