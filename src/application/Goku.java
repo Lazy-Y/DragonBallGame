@@ -69,7 +69,7 @@ public class Goku extends ImageView{
 	 
 	void jumpAction(){
 		GameManager.playMusic(jumpSound);
-		yspeed -= 1000;
+		yspeed -= jumpHeight;
 	}
 
 	void fireAction(){
@@ -111,31 +111,28 @@ public class Goku extends ImageView{
 		controller.hintLabel.setVisible(true);
 		controller.hintDisplayTime = 3000;
 		controller.goku.coolingTicks = 0;
+		controller.goku.superTicks = 7000;
 		switch (type){
 			case super1:
 				GameManager.playMusic(super1Sound);
-				superTicks = 10000;
 				xspeed = 0;
 				this.setFitHeight(120);
 				controller.hintLabel.setText("Super Saiyan I!\n" + superSaiyanIInfo);
 				break;
 			case super2:
 				GameManager.playMusic(super2Sound);
-				superTicks = 10000;
 				xspeed = -400;
 				this.setFitHeight(150);
 				controller.hintLabel.setText("Super Saiyan II!\n" + superSaiyanIIInfo);
 				break;
 			case super3:
 				GameManager.playMusic(super3Sound);
-				superTicks = 10000;
 				xspeed = 0;
 				this.setFitHeight(200);
 				controller.hintLabel.setText("Super Saiyan III!\n" + superSaiyanIIIInfo);
 				break;
 			case super4:
 				GameManager.playMusic(super4Sound);
-				superTicks = 10000;
 				xspeed = 300;
 				this.setFitHeight(300);
 				controller.hintLabel.setText("Super Saiyan IV!\n" + superSaiyanIVInfo);
@@ -143,7 +140,6 @@ public class Goku extends ImageView{
 			case superGod:
 				GameManager.playMusic(super4Sound);
 				GameManager.playMusic(superGodSound);
-				superTicks = 10000;
 				xspeed = 800;
 				this.setFitHeight(400);
 				controller.hintLabel.setText("SUPER SAIYAN GOD!!!\n" + superSaiyanGodInfo);
@@ -160,6 +156,7 @@ public class Goku extends ImageView{
 	
 	MainController controller;
 	AnchorPane mainPane;
+	double jumpHeight = 1000;
 	double yspeed = 0;
 	double gravity = 2500;
 	double pos = 350;

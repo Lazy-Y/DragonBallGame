@@ -104,8 +104,15 @@ public class MainController {
 						i--;
 					}
 				}
-				maxSpeed += 0.15;
-				ySpeed += 0.02;
+//				maxSpeed += 0.15;
+//				ySpeed += 0.02;
+//				goku.gravity += 0.1;
+//				goku.jumpHeight += 0.02;
+
+				maxSpeed += 5.0 * deltaTime / 1000.0;
+				ySpeed += 1.5 * deltaTime / 1000.0;
+				goku.gravity += 25.0 * deltaTime / 1000.0;
+				goku.jumpHeight += 10.0 * deltaTime / 1000.0;
 				if (goku.coolingTicks <= 0) kameIndicator.setBlendMode(BlendMode.SRC_OVER);
 				else kameIndicator.setBlendMode(BlendMode.MULTIPLY);
 			}
