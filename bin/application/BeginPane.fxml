@@ -20,17 +20,17 @@
             <Font size="32.0" />
          </font>
       </TextField>
-      <Button layoutX="318.0" layoutY="551.0" mnemonicParsing="false" onAction="#startGame" prefHeight="60.0" prefWidth="130.0" text="Begin">
+      <Button layoutX="252.0" layoutY="551.0" minHeight="60.0" minWidth="200.0" mnemonicParsing="false" onAction="#startGame" prefHeight="60.0" prefWidth="200.0" text="Begin">
          <font>
             <Font size="32.0" />
          </font>
       </Button>
-      <Button layoutX="466.0" layoutY="551.0" mnemonicParsing="false" onAction="#showInfo" prefHeight="60.0" prefWidth="130.0" text="Info">
+      <Button layoutX="462.0" layoutY="551.0" minHeight="60.0" minWidth="200.0" mnemonicParsing="false" onAction="#showInfo" prefHeight="60.0" prefWidth="200.0" text="Info">
          <font>
             <Font size="32.0" />
          </font>
       </Button>
-      <Label alignment="BOTTOM_LEFT" layoutX="31.0" layoutY="645.0" prefHeight="128.0" prefWidth="500.0" text="Developed by Zhenyang Zhong zhenyanz@lazy-y.com" textFill="#c3c3c3" wrapText="true" AnchorPane.bottomAnchor="270.3333740234375" AnchorPane.leftAnchor="31.0">
+      <Label alignment="BOTTOM_LEFT" prefHeight="128.0" prefWidth="500.0" text="Developed by Zhenyang Zhong zhenyanz@lazy-y.com" textFill="#c3c3c3" wrapText="true" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
          <font>
             <Font size="32.0" />
          </font>

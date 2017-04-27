@@ -20,6 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class GameManager extends Application {
@@ -36,6 +37,8 @@ public class GameManager extends Application {
 	private static MediaPlayer dragonBallSuperPlayer = loadBgMusic("DragonBallSuper.mp3");
 	private static MediaPlayer dragonBallGTPlayer = loadBgMusic("DragonBallGT.mp3");
 	static String playerName = "";
+	static double windowWidth;
+	static double windowHeight;
 
 	public static Stage getStage() {
 		return stage;
@@ -135,6 +138,12 @@ public class GameManager extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			windowWidth = Screen.getPrimary().getBounds().getWidth();
+			windowHeight = Screen.getPrimary().getBounds().getHeight();
+			
+			windowWidth = Math.min(windowWidth, windowHeight / 2);
+			windowHeight = windowWidth * 2;
+			
 			pane = new BorderPane();
 			reset();
 			Scene scene = new Scene(pane, 400, 400);
